@@ -1,0 +1,40 @@
+---
+import Window from "../Window.astro";
+import { uiFor } from "../../i18n/index.mjs";
+
+interface List {
+  id: string;
+  name: string;
+  description: { es: string; en: string };
+  script: string;
+  packages: string[];
+}
+
+interface Props {
+  list: List;
+  startHidden?: boolean;
+}
+
+const { list, startHidden = false } = Astro.props;
+const t = uiFor(Astro.currentLocale);
+---
+
+<Window
+  title={t.nota.title(list.id)}
+  id={`win-nota-${list.id}`}
+  x={150}
+  y={30}
+  width="620px"
+  height="440px"
+  icon="notepad"
+  bodyClass="nota-body"
+  startHidden={startHidden}
+>
+  <div class="notepad">
+    <pre>{list.packages.join("\n")}</pre>
+  </div>
+  <div class="status-bar">
+    <p class="status-bar-field">{t.nota.packages(list.packages.length)}</p>
+    <p class="status-bar-field">{t.nota.app}</p>
+  </div>
+</Window>

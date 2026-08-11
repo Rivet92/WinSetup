@@ -1,0 +1,36 @@
+---
+import Window from "../Window.astro";
+import CommandBox from "../CommandBox.astro";
+import { uiFor } from "../../i18n/index.mjs";
+import { lists, commandFor, GITHUB_URL } from "../../data/lists";
+
+interface Props {
+  startHidden?: boolean;
+}
+
+const { startHidden = false } = Astro.props;
+const t = uiFor(Astro.currentLocale);
+const main = lists.find((l) => l.id === "default")!;
+const command = commandFor(main);
+---
+
+<Window title={t.welcome.title} id="win-welcome" x={140} y={36} width="580px" icon="welcome" startHidden={startHidden}>
+  <h2>{t.welcome.heading}</h2>
+  <p>
+    <Fragment set:html={t.welcome.p1} />
+  </p>
+  <p>{t.welcome.p2}</p>
+
+  <CommandBox label={t.welcome.cmdLabel} command={command} />
+
+  <div class="xp-btn-row">
+    <button class="xp-btn" data-window="listas">{t.welcome.btnListas}</button>
+    <button class="xp-btn" data-window="uso">{t.welcome.btnUso}</button>
+    <button class="xp-btn" data-href={GITHUB_URL}>{t.welcome.btnCode}</button>
+  </div>
+
+  <div class="status-bar">
+    <p class="status-bar-field">{t.welcome.programs(main.packages.length)}</p>
+    <p class="status-bar-field">{t.welcome.ready}</p>
+  </div>
+</Window>

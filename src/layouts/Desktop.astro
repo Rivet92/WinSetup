@@ -1,0 +1,142 @@
+---
+import "xp.css/dist/XP.css";
+import "../styles/desktop.css";
+import wallpaper from "../assets/wallpaper.webp";
+import logo from "../assets/logo.svg";
+import Taskbar from "../components/Taskbar.astro";
+import StartMenu from "../components/StartMenu.astro";
+import DesktopIcon from "../components/DesktopIcon.astro";
+import AppIcon from "../components/AppIcon.astro";
+import IconSprite from "../components/IconSprite.astro";
+import WelcomeWindow from "../components/windows/WelcomeWindow.astro";
+import UsoWindow from "../components/windows/UsoWindow.astro";
+import ListasWindow from "../components/windows/ListasWindow.astro";
+import AboutWindow from "../components/windows/AboutWindow.astro";
+import PrivacyWindow from "../components/windows/PrivacyWindow.astro";
+import NotaWindow from "../components/windows/NotaWindow.astro";
+import { lists, GITHUB_URL, BASE } from "../data/lists";
+import { uiFor } from "../i18n/index.mjs";
+
+interface Props {
+  title?: string;
+  description?: string;
+  current?: string;
+}
+
+const lang = Astro.currentLocale === "es" ? "es" : "en";
+const t = uiFor(lang);
+const prefix = lang === "es" ? "/es" : "";
+
+// Rutas canónicas y alternadas para SEO (EN/ES).
+const pagePath = Astro.url.pathname.endsWith("/")
+  ? Astro.url.pathname
+  : `${Astro.url.pathname}/`;
+const enPath = lang === "es" ? pagePath.replace(/^\/es\//, "/") : pagePath;
+const esPath = lang === "es" ? pagePath : `/es${pagePath}`;
+const canonical = `${BASE}${enPath}`;
+
+const {
+  title = "WinSetup",
+  description =
+    "WinSetup: automatiza la instalación de tus programas de Windows con un solo comando. Scripts de PowerShell + winget.",
+  current = "welcome",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href={logo.src} type="image/svg+xml" />
+    <link rel="preload" as="image" href={wallpaper.src} fetchpriority="high" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={`${BASE}${enPath}`} />
+    <link rel="alternate" hreflang="es" href={`${BASE}${esPath}`} />
+    <link rel="alternate" hreflang="x-default" href={`${BASE}/`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="WinSetup" />
+    <meta property="og:locale" content={lang === "es" ? "es_ES" : "en_US"} />
+    <meta property="og:locale:alternate" content={lang === "es" ? "en_US" : "es_ES"} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL("/og-image.jpg", Astro.site).href} />
+    <script is:inline type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "eec651b85332465c86729bb3eca1c802"}'></script>
+    {lang === "en" && (
+      <script is:inline>
+        (function () {
+          try {
+            var saved = localStorage.getItem("winsetup-lang");
+            var isEs =
+              navigator.language && navigator.language.toLowerCase().indexOf("es") === 0;
+            if (saved === "es" || (!saved && isEs)) {
+              localStorage.setItem("winsetup-lang", "es");
+              var p = location.pathname === "/" ? "" : location.pathname.replace(/\/+$/, "");
+              location.replace("/es" + p + "/");
+            }
+          } catch (e) {}
+        })();
+      </script>
+    )}
+  </head>
+  <body class="desktop">
+    <IconSprite />
+    <img class="wallpaper" src={wallpaper.src} alt="" aria-hidden="true" fetchpriority="high" />
+
+    <div class="desktop-icons" aria-label={t.desktop.iconsAria}>
+      <DesktopIcon href={`${prefix}/`} label={t.start.welcome} window="welcome">
+        <AppIcon name="welcome" />
+      </DesktopIcon>
+
+      <DesktopIcon href={`${prefix}/uso`} label={t.start.uso} window="uso">
+        <AppIcon name="uso" />
+      </DesktopIcon>
+
+      <DesktopIcon href={`${prefix}/listas`} label={t.start.listas} window="listas">
+        <AppIcon name="listas" />
+      </DesktopIcon>
+
+      <DesktopIcon href={`${prefix}/about`} label={t.start.about} window="about">
+        <AppIcon name="about" />
+      </DesktopIcon>
+
+      <DesktopIcon
+        href={GITHUB_URL}
+        label={t.start.github}
+        external
+      >
+        <AppIcon name="github" />
+      </DesktopIcon>
+    </div>
+
+    <main class="desktop-windows">
+      <WelcomeWindow startHidden={current !== "welcome"} />
+      <UsoWindow startHidden={current !== "uso"} />
+      <ListasWindow startHidden={current !== "listas"} />
+      <AboutWindow startHidden={current !== "about"} />
+      <PrivacyWindow startHidden={current !== "privacy"} />
+      {lists.map((list) => (
+        <NotaWindow list={list} startHidden={current !== `nota-${list.id}`} />
+      ))}
+    </main>
+
+    <StartMenu />
+    <Taskbar />
+
+    <div class="balloon" hidden role="status" aria-live="polite">
+      <button class="balloon-close" aria-label={t.desktop.balloonClose}>×</button>
+      <div class="balloon-icon">
+        <AppIcon name="info" class="app-icon" />
+      </div>
+      <div class="balloon-text">
+        <p class="balloon-title"></p>
+        <p class="balloon-body"></p>
+      </div>
+    </div>
+
+    <script src="../scripts/desktop.js"></script>
+  </body>
+</html>

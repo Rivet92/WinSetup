@@ -1,0 +1,22 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  external?: boolean;
+  window?: string;
+}
+
+const { href, label, external = false, window: win } = Astro.props;
+---
+
+<a
+  class="desktop-icon"
+  href={href}
+  {...(win ? { "data-window": win } : {})}
+  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+>
+  <span class="desktop-icon-image">
+    <slot />
+  </span>
+  <span class="desktop-icon-label">{label}</span>
+</a>

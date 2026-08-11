@@ -1,0 +1,42 @@
+---
+import { uiFor } from "../i18n/index.mjs";
+import AppIcon from "./AppIcon.astro";
+import { GITHUB_URL } from "../data/lists";
+
+const lang = Astro.currentLocale === "es" ? "es" : "en";
+const t = uiFor(lang);
+const prefix = lang === "es" ? "/es" : "";
+
+const links = [
+  { href: `${prefix}/`, window: "welcome", key: "welcome", icon: "welcome" },
+  { href: `${prefix}/uso`, window: "uso", key: "uso", icon: "uso" },
+  { href: `${prefix}/listas`, window: "listas", key: "listas", icon: "listas" },
+  { href: `${prefix}/about`, window: "about", key: "about", icon: "about" },
+] as const;
+---
+
+<div class="begin-menu" hidden role="navigation" aria-label="WinSetup">
+  <div class="begin-column">
+    <p class="begin-title">WinSetup</p>
+    {links.map((link) => (
+      <a class="begin-item" href={link.href} data-window={link.window}>
+        <AppIcon name={link.icon} />
+        {t.start[link.key]}
+      </a>
+    ))}
+    <div class="begin-divider"></div>
+    <a class="begin-item" href={`${prefix}/privacy`} data-window="privacy">
+      <AppIcon name="privacy" />
+      {t.start.privacy}
+    </a>
+    <a class="begin-item" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+      <AppIcon name="github" />
+      {t.start.github}
+    </a>
+  </div>
+  <div class="begin-sidebar">
+    <div class="begin-actions">
+      <button class="begin-action begin-action-shutdown" data-shutdown>{t.start.shutdown}</button>
+    </div>
+  </div>
+</div>

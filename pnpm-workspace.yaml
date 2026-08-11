@@ -1,0 +1,9 @@
+# Ajustes de pnpm (v10+ ya no lee el campo "pnpm" de package.json).
+# Permite que esbuild ejecute su postinstall; sin esto, `pnpm install` falla
+# en CI con ERR_PNPM_IGNORED_BUILDS.
+# - onlyBuiltDependencies: lo lee pnpm 10 (store v10).
+# - allowBuilds: lo lee pnpm 11 (store v11 / supply-chain policies).
+onlyBuiltDependencies:
+  - esbuild
+allowBuilds:
+  esbuild: true

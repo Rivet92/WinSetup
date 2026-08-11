@@ -1,0 +1,43 @@
+---
+import Window from "../Window.astro";
+import CommandBox from "../CommandBox.astro";
+import { uiFor } from "../../i18n/index.mjs";
+import { lists, commandFor } from "../../data/lists";
+
+interface Props {
+  startHidden?: boolean;
+}
+
+const { startHidden = false } = Astro.props;
+const t = uiFor(Astro.currentLocale);
+const main = lists.find((l) => l.id === "default");
+const command = commandFor(main);
+---
+
+<Window title={t.uso.title} id="win-uso" x={140} y={30} width="600px" icon="uso" startHidden={startHidden}>
+  <h2>{t.uso.heading}</h2>
+  <ol>
+    <li><Fragment set:html={t.uso.step1} /></li>
+    <li>{t.uso.step2}</li>
+    <li><Fragment set:html={t.uso.step3} /></li>
+  </ol>
+
+  <h3>{t.uso.mainHeading}</h3>
+  <CommandBox label={t.uso.cmdLabel} command={command} />
+
+  <div class="notice">
+    <p class="notice-title">{t.uso.whyTitle}</p>
+    <p>
+      <Fragment set:html={t.uso.whyBody} />
+    </p>
+  </div>
+
+  <div class="notice">
+    <p class="notice-title">{t.uso.notesTitle}</p>
+    <ul>
+      <li><Fragment set:html={t.uso.note1} /></li>
+      <li>{t.uso.note2}</li>
+      <li>{t.uso.note3}</li>
+    </ul>
+  </div>
+</Window>

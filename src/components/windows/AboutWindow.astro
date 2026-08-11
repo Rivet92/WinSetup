@@ -1,0 +1,46 @@
+---
+import Window from "../Window.astro";
+import { uiFor } from "../../i18n/index.mjs";
+import { GITHUB_URL } from "../../data/lists";
+
+interface Props {
+  startHidden?: boolean;
+}
+
+const { startHidden = false } = Astro.props;
+const t = uiFor(Astro.currentLocale);
+---
+
+<Window title={t.about.title} id="win-about" x={140} y={40} width="560px" icon="about" startHidden={startHidden}>
+  <h2>{t.about.heading}</h2>
+  <p>
+    <Fragment set:html={t.about.p1} />
+  </p>
+
+  <h3>{t.about.howHeading}</h3>
+  <ul>
+    <li><Fragment set:html={t.about.how1} /></li>
+    <li><Fragment set:html={t.about.how2} /></li>
+    <li>{t.about.how3}</li>
+    <li><Fragment set:html={t.about.how4} /></li>
+  </ul>
+
+  <h3>{t.about.techHeading}</h3>
+  <ul>
+    <li><Fragment set:html={t.about.tech1} /></li>
+    <li><Fragment set:html={t.about.tech2} /></li>
+    <li><Fragment set:html={t.about.tech3} /></li>
+  </ul>
+
+  <div class="notice">
+    <p class="notice-title">{t.about.noticeTitle}</p>
+    <p>{t.about.noticeBody}</p>
+  </div>
+
+  <div class="xp-btn-row">
+    <button class="xp-btn" data-window="privacy">{t.start.privacy}</button>
+    <button class="xp-btn" data-href={GITHUB_URL}>
+      {t.about.btn}
+    </button>
+  </div>
+</Window>

@@ -1,0 +1,11 @@
+# ============================================
+#  WinSetup - lista "media"
+#  Un ID de winget por linea. Comentarios con #.
+# ============================================
+
+VideoLAN.VLC
+Spotify.Spotify
+AIMP.AIMP
+HandBrake.HandBrake
+Audacity.Audacity
+GIMP.GIMP

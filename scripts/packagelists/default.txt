@@ -1,0 +1,47 @@
+# ============================================
+#  WinSetup - lista "default"
+#  Un ID de winget por linea. Comentarios con #.
+# ============================================
+
+# ---- Navegadores ----
+Mozilla.Firefox
+Google.Chrome
+
+# ---- Comunicacion ----
+Telegram.TelegramDesktop
+Discord.Discord
+
+# ---- Desarrollo ----
+Git.Git
+Microsoft.VisualStudioCode
+OpenJS.NodeJS
+Python.Python.3.12
+Docker.DockerDesktop
+GitHub.GitHubDesktop
+Microsoft.PowerToys
+Notepad++.Notepad++
+Postman.Postman
+
+# ---- Multimedia ----
+VideoLAN.VLC
+Spotify.Spotify
+AIMP.AIMP
+HandBrake.HandBrake
+Audacity.Audacity
+GIMP.GIMP
+
+# ---- Oficina y utilidades ----
+TheDocumentFoundation.LibreOffice
+SumatraPDF.SumatraPDF
+7zip.7zip
+qBittorrent.qBittorrent
+calibre.calibre
+Bitwarden.Bitwarden
+Rufus.Rufus
+Obsidian.Obsidian
+
+# ---- Gaming ----
+Valve.Steam
+EpicGames.EpicGamesLauncher
+RiotGames.LeagueOfLegends.EUW
+OBSProject.OBSStudio

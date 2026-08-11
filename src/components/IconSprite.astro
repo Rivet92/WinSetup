@@ -1,0 +1,57 @@
+---
+// Sprite de iconos: cada icono se define UNA vez como <symbol> y los usos
+// (<AppIcon name="...">) lo referencian con <use>, para no repetir el mismo
+// path en cada instancia del HTML.
+---
+<svg class="icon-sprite" style="display:none" aria-hidden="true">
+  <symbol id="icon-welcome" viewBox="0 0 32 32">
+    <rect x="3" y="5" width="26" height="18" rx="1" fill="#f4f7fb" stroke="#0a3d91" stroke-width="1.5" />
+    <rect x="4.5" y="6.5" width="23" height="12" fill="#0997ff" />
+    <circle cx="8" cy="10" r="1.5" fill="#fff" />
+    <rect x="11" y="9" width="12" height="2" fill="#fff" />
+    <rect x="13.5" y="11.5" width="9" height="2" fill="#7fd7ff" />
+    <path d="M13 23h6" stroke="#0a3d91" stroke-width="2" />
+    <rect x="11" y="23" width="10" height="3" rx="1" fill="#c0c6cf" stroke="#0a3d91" stroke-width="1" />
+  </symbol>
+  <symbol id="icon-uso" viewBox="0 0 32 32">
+    <path d="M6 2h13l7 7v21H6z" fill="#fff" stroke="#0a3d91" stroke-width="1.5" />
+    <path d="M19 2l7 7h-7z" fill="#c9d6e8" stroke="#0a3d91" stroke-width="1.5" />
+    <rect x="9" y="13" width="14" height="2" fill="#5a7fae" />
+    <rect x="9" y="17" width="14" height="2" fill="#8fb7e8" />
+    <rect x="9" y="21" width="9" height="2" fill="#8fb7e8" />
+  </symbol>
+  <symbol id="icon-listas" viewBox="0 0 32 32">
+    <path d="M3 7h8l2.5 2.8H28v15H3z" fill="#ffd766" stroke="#b7850a" stroke-width="1.4" />
+    <path d="M3 7h8l2.5 2.8H28v2.6H3z" fill="#ffc74a" stroke="#b7850a" stroke-width="1.2" />
+  </symbol>
+  <symbol id="icon-about" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="13" fill="#f4c542" stroke="#a87a00" stroke-width="2" />
+    <circle cx="16" cy="10" r="2.2" fill="#a87a00" />
+    <rect x="14" y="14" width="4" height="11" rx="1" fill="#a87a00" />
+  </symbol>
+  <symbol id="icon-privacy" viewBox="0 0 32 32">
+    <path d="M16 3l10 4v8c0 6-4.2 10.7-10 13C10.2 25.7 6 21 6 15V7z" fill="#7bb6f2" stroke="#0a3d91" stroke-width="1.5" />
+    <path d="M11 15l3.5 3.5L21.5 11" fill="none" stroke="#0a3d91" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  </symbol>
+  <symbol id="icon-github" viewBox="0 -0.5 48 48">
+    <path
+      fill="#3E75C3"
+      transform="translate(-700, -560)"
+      d="M723.9985,560 C710.746,560 700,570.787092 700,584.096644 C700,594.740671 706.876,603.77183 716.4145,606.958412 C717.6145,607.179786 718.0525,606.435849 718.0525,605.797328 C718.0525,605.225068 718.0315,603.710086 718.0195,601.699648 C711.343,603.155898 709.9345,598.469394 709.9345,598.469394 C708.844,595.686405 707.2705,594.94548 707.2705,594.94548 C705.091,593.450075 707.4355,593.480194 707.4355,593.480194 C709.843,593.650366 711.1105,595.963499 711.1105,595.963499 C713.2525,599.645538 716.728,598.58234 718.096,597.964902 C718.3135,596.407754 718.9345,595.346062 719.62,594.743683 C714.2905,594.135281 708.688,592.069123 708.688,582.836167 C708.688,580.205279 709.6225,578.054788 711.1585,576.369634 C710.911,575.759726 710.0875,573.311058 711.3925,569.993458 C711.3925,569.993458 713.4085,569.345902 717.9925,572.46321 C719.908,571.928599 721.96,571.662047 724.0015,571.651505 C726.04,571.662047 728.0935,571.928599 730.0105,572.46321 C734.5915,569.345902 736.603,569.993458 736.603,569.993458 C737.9125,573.311058 737.089,575.759726 736.8415,576.369634 C738.3805,578.054788 739.309,580.205279 739.309,582.836167 C739.309,592.091712 733.6975,594.129257 728.3515,594.725612 C729.2125,595.469549 729.9805,596.939353 729.9805,599.18773 C729.9805,602.408949 729.9505,605.006706 729.9505,605.797328 C729.9505,606.441873 730.3825,607.191834 731.6005,606.9554 C741.13,603.762794 748,594.737659 748,584.096644 C748,570.787092 737.254,560 723.9985,560"
+    />
+  </symbol>
+  <symbol id="icon-info" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="13" fill="#fff" stroke="#0d8dea" stroke-width="2.5" />
+    <circle cx="16" cy="10.5" r="2" fill="#0d8dea" />
+    <rect x="14.5" y="14.5" width="3" height="9" rx="1" fill="#0d8dea" />
+  </symbol>
+  <symbol id="icon-notepad" viewBox="0 0 32 32">
+    <path d="M9 2h15v28H9z" fill="#fff" stroke="#0a3d91" stroke-width="1.5" />
+    <rect x="6" y="2" width="5" height="4" rx="1" fill="#7fb3e8" stroke="#0a3d91" stroke-width="1" />
+    <path d="M6 2h3" stroke="#0a3d91" stroke-width="1" />
+    <rect x="11" y="9" width="10" height="2" fill="#5a7fae" />
+    <rect x="11" y="13" width="10" height="2" fill="#5a7fae" />
+    <rect x="11" y="17" width="10" height="2" fill="#5a7fae" />
+    <rect x="11" y="21" width="7" height="2" fill="#5a7fae" />
+  </symbol>
+</svg>

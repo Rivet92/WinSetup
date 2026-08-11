@@ -1,0 +1,38 @@
+---
+import { uiFor } from "../i18n/index.mjs";
+import logo from "../assets/logo.svg";
+
+const { title = "WinSetup" } = Astro.props;
+const isEs = Astro.currentLocale === "es";
+const t = uiFor(Astro.currentLocale);
+
+let targetUrl;
+if (isEs) {
+  targetUrl = Astro.url.pathname.replace(/^\/es/, "") || "/";
+} else {
+  targetUrl =
+    Astro.url.pathname === "/" ? "/es/" : `/es${Astro.url.pathname}`;
+}
+---
+
+<div class="taskbar">
+  <button class="start-button" data-start aria-label={t.taskbar.startAria}>
+    <img class="start-logo" src={logo.src} alt="" aria-hidden="true" />
+    <span>{title}</span>
+  </button>
+
+  <div class="taskbar-buttons" role="toolbar" aria-label={t.taskbar.windowsAria}></div>
+
+  <div class="taskbar-tray">
+    <button
+      class="tray-lang"
+      data-set-lang={isEs ? "en" : "es"}
+      data-lang-href={targetUrl}
+      data-tip={t.taskbar.langTitle}
+      aria-label={t.taskbar.langTitle}
+    >
+      {t.taskbar.langLabel}
+    </button>
+    <span data-clock>--:--</span>
+  </div>
+</div>

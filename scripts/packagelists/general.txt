@@ -1,0 +1,28 @@
+# ============================================
+#  WinSetup - lista "general"
+#  Un ID de winget por linea. Comentarios con #.
+# ============================================
+
+# ---- Navegadores ----
+Mozilla.Firefox
+Google.Chrome
+
+# ---- Oficina ----
+TheDocumentFoundation.LibreOffice
+SumatraPDF.SumatraPDF
+
+# ---- Comunicacion ----
+Telegram.TelegramDesktop
+
+# ---- Descargas / Utilidades ----
+7zip.7zip
+qBittorrent.qBittorrent
+calibre.calibre
+Bitwarden.Bitwarden
+Rufus.Rufus
+
+# ---- Productividad ----
+Obsidian.Obsidian
+
+# ---- Edicion / Creatividad ----
+GIMP.GIMP

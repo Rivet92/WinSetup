@@ -1,0 +1,10 @@
+# ============================================
+#  WinSetup - lista "gaming"
+#  Un ID de winget por linea. Comentarios con #.
+# ============================================
+
+Valve.Steam
+Discord.Discord
+EpicGames.EpicGamesLauncher
+RiotGames.LeagueOfLegends.EUW
+OBSProject.OBSStudio

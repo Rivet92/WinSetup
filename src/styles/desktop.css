@@ -1,0 +1,1025 @@
+/* ============================================================
+   WinSetup - estilos del escritorio Windows XP
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body.desktop {
+  font-family: "Pixelated MS Sans Serif", Tahoma, Arial, sans-serif;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  background: #3a6ea5;
+}
+
+/* ---------- Wallpaper ---------- */
+.wallpaper {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  z-index: 0;
+}
+
+/* ---------- Escritorio ---------- */
+.desktop {
+  position: relative;
+  height: 100vh;
+  z-index: 1;
+  overflow: hidden;
+  padding-bottom: 34px;
+}
+
+.desktop-windows {
+  position: relative;
+  height: 100%;
+}
+
+/* ---------- Ventanas ---------- */
+.xp-window {
+  position: absolute;
+  z-index: 10;
+  /* Borde azul del tema Luna (insets) + sombra exterior */  box-shadow:
+    inset -1px -1px #00138c,
+    inset 1px 1px #0831d9,
+    inset -2px -2px #001ea0,
+    inset 2px 2px #166aee,
+    inset -3px -3px #003bda,
+    inset 3px 3px #0855dd,
+    2px 2px 8px rgba(0, 0, 0, 0.45);
+  max-width: calc(100vw - 16px);
+}
+
+/* Barra de titulo mas alta, estilo Luna */
+.xp-window .title-bar {
+  height: 30px;
+  padding: 3px 8px 3px 6px;
+  font-size: 15px;
+  cursor: grab;
+  touch-action: none;
+  /* estado inactivo (azul apagado #7b99e1) por defecto; .focused lo deja azul vivo */
+  background: linear-gradient(
+    180deg,
+    #b4c6f0 0%,
+    #8da7e6 8%,
+    #839fe3 40%,
+    #7b99e1 88%,
+    #7b99e1 93%,
+    #7090dd 95%,
+    #6284d8 96%,
+    #5b7ed5
+  );
+  border-top-color: #86a1e3;
+  border-left-color: #86a1e3;
+  border-right-color: #5b7ed5;
+  text-shadow: 1px 1px #3c5bb5;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    text-shadow 0.15s ease;
+}
+
+.xp-window.focused .title-bar {
+  background: linear-gradient(
+    180deg,
+    #0997ff 0%,
+    #0053ee 8%,
+    #0050ee 40%,
+    #0066ff 88%,
+    #0066ff 93%,
+    #005bff 95%,
+    #003dd7 96%,
+    #003dd7
+  );
+  border-top-color: #0831d9;
+  border-left-color: #0831d9;
+  border-right-color: #001ea0;
+  text-shadow: 1px 1px #0f1089;
+}
+
+/* Borde de ventana: azul Luna solo en la activa */
+.xp-window:not(.focused) {
+  box-shadow:
+    inset -1px -1px #5c7bd4,
+    inset 1px 1px #9db3ec,
+    inset -2px -2px #6a86d8,
+    inset 2px 2px #b0c2f0,
+    inset -3px -3px #7590dc,
+    inset 3px 3px #b9c8f3,
+    2px 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.xp-window .title-bar-text {
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.xp-window .title-bar .app-icon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.xp-window .title-bar-controls button {
+  min-width: 24px;
+  min-height: 24px;
+}
+
+/* Controles de ventana inactiva: tono pálido pero con color. XP.css pinta la
+   cara del boton en background-image (data URI), asi que se aclara mezclandola
+   con el color inactivo usando screen. */
+.xp-window:not(.focused) .title-bar-controls button {
+  background-color: #5e85ea;
+  background-blend-mode: screen;
+}
+
+.xp-window:not(.focused) .title-bar-controls button[aria-label="Close"] {
+  background-color: #ad728d;
+}
+
+.xp-window.dragging .title-bar {
+  cursor: grabbing;
+}
+
+/* La ventana es una columna para que el cuerpo se redimensione con ella */
+.xp-window {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Las ventanas incrustadas pero no abiertas se ocultan por completo */
+.xp-window.is-hidden {
+  display: none !important;
+}
+
+.xp-window .window-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  max-height: 62vh;
+}
+
+/* Al redimensionar a mano, el cuerpo rellena toda la ventana */
+.xp-window.resized .window-body,
+.xp-window.maximized .window-body {
+  max-height: none;
+}
+
+/* ---------- Asas de redimensionado ---------- */
+.win-resize-handle {
+  position: absolute;
+  z-index: 20;
+}
+
+.win-resize-handle.n {
+  top: -3px;
+  left: 10px;
+  right: 10px;
+  height: 6px;
+  cursor: ns-resize;
+}
+
+.win-resize-handle.s {
+  bottom: -3px;
+  left: 10px;
+  right: 10px;
+  height: 6px;
+  cursor: ns-resize;
+}
+
+.win-resize-handle.e {
+  top: 10px;
+  bottom: 10px;
+  right: -3px;
+  width: 6px;
+  cursor: ew-resize;
+}
+
+.win-resize-handle.w {
+  top: 10px;
+  bottom: 10px;
+  left: -3px;
+  width: 6px;
+  cursor: ew-resize;
+}
+
+.win-resize-handle.ne {
+  top: -4px;
+  right: -4px;
+  width: 12px;
+  height: 12px;
+  cursor: nesw-resize;
+}
+
+.win-resize-handle.nw {
+  top: -4px;
+  left: -4px;
+  width: 12px;
+  height: 12px;
+  cursor: nwse-resize;
+}
+
+.win-resize-handle.se {
+  bottom: -4px;
+  right: -4px;
+  width: 12px;
+  height: 12px;
+  cursor: nwse-resize;
+}
+
+.win-resize-handle.sw {
+  bottom: -4px;
+  left: -4px;
+  width: 12px;
+  height: 12px;
+  cursor: nesw-resize;
+}
+
+/* ---------- Scrollbars estilo XP (WebKit) ---------- */
+.xp-window .window-body {
+  scrollbar-width: thin;
+  scrollbar-color: #6b8ad8 #e8e6da;
+}
+
+.xp-window .window-body::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.xp-window .window-body::-webkit-scrollbar-track {
+  background: #e8e6da;
+  box-shadow: inset 0 0 0 1px #8b96a5;
+}
+
+.xp-window .window-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f4f6f8 0%, #c9d1dc 40%, #aab6c4 100%);
+  border: 1px solid #66707d;
+}
+
+.xp-window .window-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #d5e9ff 0%, #a9cdf5 40%, #7fb0e8 100%);
+}
+
+.xp-window .window-body::-webkit-scrollbar-button {
+  background: #e8e6da;
+  border: 1px solid #8b96a5;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 9px 9px;
+}
+
+.xp-window .window-body::-webkit-scrollbar-button:vertical:start {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M8 5l5 6H3z' fill='%232b2b2b'/%3E%3C/svg%3E");
+}
+
+.xp-window .window-body::-webkit-scrollbar-button:vertical:end {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M8 11L3 5h10z' fill='%232b2b2b'/%3E%3C/svg%3E");
+}
+
+.xp-window .window-body::-webkit-scrollbar-button:horizontal:start {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M5 8l6-5v10z' fill='%232b2b2b'/%3E%3C/svg%3E");
+}
+
+.xp-window .window-body::-webkit-scrollbar-button:horizontal:end {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M11 8L5 3v10z' fill='%232b2b2b'/%3E%3C/svg%3E");
+}
+
+.xp-window.minimized,
+.xp-window.closed {
+  display: none;
+}
+
+.xp-window.maximized {
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none;
+}
+
+.xp-window .status-bar {
+  margin-top: 8px;
+}
+
+/* ---------- Iconos de escritorio ---------- */
+.desktop-icons {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 14px;
+  padding: 6px;
+  /* Si el alto no da para todos los iconos, se envuelven en columnas
+     en vez de quedar ocultos bajo la barra de tareas. 8px arriba + 34px
+     de taskbar + 8px de margen inferior. */
+  max-height: calc(100vh - 50px);
+}
+
+.desktop-icon {
+  width: 78px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: #fff;
+  /* Sombra caracteristica de XP: legible sobre fondos claros y oscuros */
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.95),
+    0 2px 2px rgba(0, 0, 0, 0.6),
+    1px 1px 4px rgba(0, 0, 0, 0.8),
+    1px 1px 7px rgba(0, 0, 0, 0.55);
+  font-size: 12px;
+  text-align: center;
+  padding: 5px 4px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+/* Sin borde de foco al hacer clic/seleccionar (herencia de a:focus) */
+.desktop-icon:focus {
+  outline: none;
+}
+
+/* Seleccion estilo XP: solo el fondo azul translucido detras del texto.
+   El padding vive siempre en la etiqueta para que seleccionar no cambie su tamano. */
+.desktop-icon.selected .desktop-icon-label {
+  background: rgba(49, 106, 197, 0.5);
+  border-radius: 2px;
+}
+
+.desktop-icon svg {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
+}
+
+.desktop-icon-label {
+  line-height: 1.15;
+  padding: 2px 5px;
+}
+
+/* ---------- Taskbar ---------- */
+.taskbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  background: linear-gradient(
+    180deg,
+    #316ac5 0%,
+    #2153b8 18%,
+    #2f66ca 52%,
+    #2459b8 82%,
+    #143f96 100%
+  );
+  border-top: 1px solid #7ab1ee;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.start-button {
+  height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  padding: 0 12px 0 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(180deg, #a8e063 0%, #5cb000 45%, #3d9700 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.start-button .start-logo {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.start-button:active {
+  background: linear-gradient(180deg, #3d9700 0%, #5cb000 55%, #a8e063 100%);
+}
+
+.taskbar-buttons {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.taskbar-btn {
+  max-width: 160px;
+  min-width: 70px;
+  height: 24px;
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+  font-size: 11px;
+  color: #fff;
+  border: 1px solid #4b78c4;
+  border-radius: 4px;
+  cursor: pointer;
+  background: linear-gradient(180deg, #4a8ade 0%, #3c74c8 50%, #2f5fb0 100%);
+  overflow: hidden;
+  text-align: left;
+  padding: 0 6px;
+}
+
+.taskbar-btn .app-icon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.taskbar-btn-label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.taskbar-btn:hover {
+  filter: brightness(1.1);
+}
+
+/* Boton de tarea seleccionado (presionado). Specificity alta para
+   vencer el estado .active/.active blanco de XP.css. */
+.taskbar .taskbar-btn.active,
+.taskbar .taskbar-btn:active {
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.8),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(180deg, #2f5fb0 0%, #3c74c8 50%, #4a8ade 100%);
+}
+
+.taskbar-tray {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 11px;
+  padding: 0 8px;
+  border-left: 1px solid #1a3f8a;
+  align-self: stretch;
+  margin-right: -8px;
+  white-space: nowrap;
+  background: linear-gradient(
+    180deg,
+    #3fa9f0 0%,
+    #1f98e9 18%,
+    #0d8dea 52%,
+    #0b7fd8 82%,
+    #066abf 100%
+  );
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.tray-lang {
+  position: relative;
+  height: 18px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0 6px;
+  border: 1px solid #1a3f8a;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tray-lang:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.tray-lang::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 7px);
+  right: 0;
+  padding: 6px 9px;
+  background: #ffffe1;
+  border: 1px solid #7f9db9;
+  border-radius: 6px;
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 0 #a9b9c7,
+    2px 2px 6px rgba(0, 0, 0, 0.4);
+  font-family: "Pixelated MS Sans Serif", Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  color: #000;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition:
+    opacity 150ms ease,
+    transform 150ms ease,
+    visibility 150ms ease;
+  z-index: 500;
+}
+
+.tray-lang:hover::after,
+.tray-lang:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ---------- Menu de inicio ---------- */
+.begin-menu {
+  position: fixed;
+  left: 4px;
+  bottom: 38px;
+  z-index: 120;
+  width: 320px;
+  display: flex;
+  border-radius: 8px 8px 0 0;
+  border: 1px solid #003c74;
+  background: #fff;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.begin-menu[hidden] {
+  display: none;
+}
+
+.begin-column {
+  flex: 1;
+  padding: 6px 0 8px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.begin-title {
+  margin: 6px 12px 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #2b2b2b;
+}
+
+.begin-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 12px;
+  text-decoration: none;
+  color: #2b2b2b;
+  font-size: 12px;
+  border: 1px solid transparent;
+}
+
+.begin-item:hover {
+  background: #316ac5;
+  color: #fff;
+}
+
+.begin-item svg {
+  width: 24px;
+  height: 24px;
+  flex: none;
+}
+
+.begin-divider {
+  margin: 6px 12px;
+  border-top: 1px solid #b9c5d6;
+}
+
+.begin-sidebar {
+  width: 118px;
+  flex: none;
+  background: linear-gradient(180deg, #2f6fd8 0%, #0d52c4 60%, #0a46a6 100%);
+  border-left: 1px solid #003c74;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.begin-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+  width: 100%;
+  margin-top: auto;
+}
+
+.begin-action {
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  border: 1px solid #003c74;
+  border-radius: 4px;
+  padding: 5px 8px;
+  cursor: pointer;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.begin-action-shutdown {
+  background: linear-gradient(180deg, #f2836f 0%, #d4451f 100%);
+}
+
+.begin-action:active {
+  filter: brightness(0.85);
+}
+
+/* ---------- Caja de comando ---------- */
+.command-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 10px 0;
+}
+
+.command-label {
+  font-size: 12px;
+  color: #1a2b45;
+}
+
+.command-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.command-input {
+  flex: 1;
+  min-width: 0;
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 13.5px;
+  padding: 4px 6px;
+  color: #0b3d6e;
+  /* el body desactiva user-select: se rehabilita aqui para poder copiar a mano */
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.copy-btn {
+  min-width: 76px;
+  flex: none;
+}
+
+/* ---------- Tabla de listas ---------- */
+.xp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.xp-table th,
+.xp-table td {
+  border: 1px solid #a9b6cc;
+  padding: 5px 7px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.xp-table th {
+  background: linear-gradient(180deg, #dbe9fb 0%, #b9d2f0 100%);
+  color: #1a2b45;
+}
+
+.xp-table tr:nth-child(even) td {
+  background: #f3f7fc;
+}
+
+.xp-table code {
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 12.5px;
+  background: #eef2f7;
+  padding: 1px 4px;
+  border: 1px solid #ccd6e4;
+  border-radius: 2px;
+  word-break: break-all;
+}
+
+/* ---------- Texto y botones dentro de ventanas ---------- */
+.xp-window .window-body {
+  font-size: 13px;
+}
+
+.xp-window h2 {
+  font-size: 16px;
+  color: #0b3d6e;
+  margin: 0 0 8px;
+}
+
+.xp-window h3 {
+  font-size: 14px;
+  color: #1a2b45;
+  margin: 12px 0 6px;
+}
+
+.xp-window p,
+.xp-window li {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #1a2b45;
+}
+
+.xp-window ul {
+  margin: 6px 0;
+  padding-left: 20px;
+}
+
+.xp-btn-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* ---------- Cajas de aviso ---------- */
+.notice {
+  background: #fff;
+  border: 1px solid #0831d9;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 12px 0;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.08);
+}
+
+.notice-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: #0b3d6e;
+  margin-bottom: 4px;
+}
+
+.notice ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+}
+
+.notice li {
+  margin: 2px 0;
+}
+
+/* ---------- Toast ---------- */
+/* ---------- Bocadillo de notificacion estilo XP ---------- */
+.balloon {
+  position: fixed;
+  right: 10px;
+  bottom: 46px;
+  z-index: 400;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 300px;
+  max-width: 90vw;
+  padding: 9px 10px 10px;
+  background: #ffffe1;
+  border: 1px solid #7f9db9;
+  border-radius: 6px;
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 0 #a9b9c7,
+    2px 2px 6px rgba(0, 0, 0, 0.4);
+  font-size: 11px;
+  line-height: 1.35;
+  color: #000;
+}
+
+.balloon[hidden] {
+  display: none;
+}
+
+.balloon.show {
+  animation: balloon-in 180ms ease-out;
+}
+
+@keyframes balloon-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Movimiento reducido: sin animaciones de transicion (toast, ventanas, etc.) */
+@media (prefers-reduced-motion: reduce) {
+  .balloon.show {
+    animation: none;
+  }
+
+  .xp-window .title-bar {
+    transition: none;
+  }
+}
+
+.balloon-icon {
+  flex: none;
+}
+
+.balloon-icon .app-icon {
+  width: 26px;
+  height: 26px;
+}
+
+.balloon-text {
+  min-width: 0;
+}
+
+.balloon-title {
+  font-weight: 700;
+  margin: 0 20px 2px 0;
+}
+
+.balloon-body {
+  margin: 0;
+}
+
+.balloon-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 16px;
+  height: 16px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+  font-size: 13px;
+  line-height: 1;
+  color: #333;
+  cursor: pointer;
+}
+
+.balloon-close:hover {
+  color: #000;
+}
+
+/* ---------- Bloc de notas (ventana de paquetes) ---------- */
+.window-body.nota-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.nota-body .notepad {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.nota-body .notepad pre {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0;
+  padding: 8px 10px;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #7f9db9;
+  box-shadow: inset 1px 1px 0 #d8d8d8;
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #000;
+  white-space: pre;
+}
+
+.nota-body .status-bar {
+  margin-top: 8px;
+}
+
+/* ============================================================
+   Responsive / movil
+   ============================================================ */
+@media (max-width: 768px) {
+  body.desktop {
+    overflow: auto;
+  }
+
+  .desktop {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    padding-top: 56px; /* espacio para la taskbar superior */
+    padding-bottom: 0;
+  }
+
+  .desktop-icons {
+    display: none; /* en movil se navega con el menu de inicio */
+  }
+
+  .desktop-icon {
+    width: 74px;
+  }
+
+  .desktop-windows {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 8px;
+  }
+
+  .desktop-windows .xp-window {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 560px;
+  }
+
+  /* Sin scroll vertical interno: las ventanas ocupan lo que necesiten */
+  .xp-window .window-body {
+    max-height: none;
+    overflow: visible;
+  }
+
+  /* En movil se oculta el input del comando y solo queda el boton copiar */
+  .command-input {
+    display: none;
+  }
+
+  .copy-btn {
+    width: 100%;
+  }
+
+  /* En movil no se redimensiona a mano */
+  .win-resize-handle {
+    display: none;
+  }
+
+  /* Barra de tareas arriba, sin lista de ventanas abiertas */
+  .taskbar {
+    top: 0;
+    bottom: auto;
+    height: 44px;
+  }
+
+  .taskbar-buttons {
+    display: none;
+  }
+
+  /* El menu de inicio se despliega bajo la barra superior y hace de
+     navegacion en movil */
+  .begin-menu {
+    display: flex;
+    top: 52px;
+    bottom: auto;
+    left: 4px;
+    right: 4px;
+    width: auto;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .taskbar-tray {
+    margin-left: auto;
+  }
+}

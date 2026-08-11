@@ -1,0 +1,40 @@
+---
+import Window from "../Window.astro";
+import { uiFor } from "../../i18n/index.mjs";
+
+interface Props {
+  startHidden?: boolean;
+}
+
+const { startHidden = false } = Astro.props;
+const t = uiFor(Astro.currentLocale);
+---
+
+<Window title={t.privacy.title} id="win-privacy" x={140} y={30} width="620px" icon="privacy" startHidden={startHidden}>
+  <p>{t.privacy.intro}</p>
+
+  <h3>{t.privacy.analyticsHeading}</h3>
+  <p>
+    <Fragment set:html={t.privacy.analyticsBody} />
+  </p>
+
+  <h3>{t.privacy.hostingHeading}</h3>
+  <p>
+    <Fragment set:html={t.privacy.hostingBody} />
+  </p>
+
+  <h3>{t.privacy.externalHeading}</h3>
+  <p>{t.privacy.externalBody}</p>
+
+  <h3>{t.privacy.changesHeading}</h3>
+  <p>{t.privacy.changesBody}</p>
+
+  <h3>{t.privacy.contactHeading}</h3>
+  <p>
+    <Fragment set:html={t.privacy.contactBody} />
+  </p>
+
+  <div class="xp-btn-row">
+    <button class="xp-btn" data-window="about">{t.privacy.btnBack}</button>
+  </div>
+</Window>

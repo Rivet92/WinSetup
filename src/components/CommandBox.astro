@@ -1,0 +1,19 @@
+---
+import { uiFor } from "../i18n/index.mjs";
+
+interface Props {
+  command: string;
+  label?: string;
+}
+
+const t = uiFor(Astro.currentLocale);
+const { command, label } = Astro.props;
+---
+
+<div class="command-box">
+  {label && <label class="command-label">{label}</label>}
+  <div class="field-row command-row">
+    <input class="command-input" type="text" readonly value={command} />
+    <button class="copy-btn">{t.cmd.copy}</button>
+  </div>
+</div>

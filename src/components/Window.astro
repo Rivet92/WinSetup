@@ -1,0 +1,60 @@
+---
+import AppIcon from "./AppIcon.astro";
+
+interface Props {
+  title: string;
+  x?: number;
+  y?: number;
+  width?: string;
+  height?: string;
+  id?: string;
+  controls?: boolean;
+  icon?: string;
+  bodyClass?: string;
+  startHidden?: boolean;
+}
+
+const {
+  title,
+  x = 40,
+  y = 40,
+  width = "540px",
+  height = "auto",
+  id,
+  controls = true,
+  icon,
+  bodyClass,
+  startHidden = false,
+} = Astro.props;
+
+const style = `left:${x}px;top:${y}px;width:${width};${
+  height !== "auto" ? `height:${height};` : ""
+}`;
+const rootClass = `window xp-window${startHidden ? " is-hidden" : ""}`;
+---
+
+<div
+  class={rootClass}
+  id={id}
+  style={style}
+  role="dialog"
+  aria-labelledby={id ? `${id}-title` : undefined}
+  tabindex="-1"
+>
+  <div class="title-bar">
+    <div class="title-bar-text" id={id ? `${id}-title` : undefined}>
+      {icon && <AppIcon name={icon} class="app-icon" />}
+      {title}
+    </div>
+    {controls && (
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    )}
+  </div>
+  <div class={`window-body${bodyClass ? ` ${bodyClass}` : ""}`}>
+    <slot />
+  </div>
+</div>

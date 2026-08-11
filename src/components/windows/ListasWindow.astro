@@ -1,0 +1,50 @@
+---
+import Window from "../Window.astro";
+import CommandBox from "../CommandBox.astro";
+import { uiFor } from "../../i18n/index.mjs";
+import { lists, commandFor } from "../../data/lists";
+
+interface Props {
+  startHidden?: boolean;
+}
+
+const { startHidden = false } = Astro.props;
+const lang = Astro.currentLocale === "es" ? "es" : "en";
+const t = uiFor(lang);
+---
+
+<Window title={t.listas.title} id="win-listas" x={140} y={30} width="820px" icon="listas" startHidden={startHidden}>
+  <h2>{t.listas.heading}</h2>
+  <p>
+    <Fragment set:html={t.listas.intro} />
+  </p>
+
+  <table class="xp-table">
+    <thead>
+      <tr>
+        <th>{t.listas.thList}</th>
+        <th>{t.listas.thPackages}</th>
+        <th>{t.listas.thCommand}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {lists.map((l) => (
+        <tr>
+          <td>
+            <strong>{l.name}</strong>
+            <br />
+            <span>{l.description[lang]}</span>
+            <br />
+            <a href={`/packagelists/${l.id}.txt`} data-window={`nota-${l.id}`}>
+              {t.listas.viewList}
+            </a>
+          </td>
+          <td>{t.listas.apps(l.packages.length)}</td>
+          <td>
+            <CommandBox command={commandFor(l)} />
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</Window>
