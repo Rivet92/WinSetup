@@ -982,13 +982,22 @@ body.desktop {
     overflow: visible;
   }
 
-  /* En movil se oculta el input del comando y solo queda el boton copiar */
+  /* En movil se oculta el input del comando y solo queda el boton copiar,
+     salvo en la ventana de bienvenida, donde el comando se muestra completo */
   .command-input {
     display: none;
   }
 
+  #win-welcome .command-input {
+    display: block;
+  }
+
   .copy-btn {
     width: 100%;
+  }
+
+  #win-welcome .copy-btn {
+    width: auto;
   }
 
   /* En movil no se redimensiona a mano */
