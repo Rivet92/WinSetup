@@ -18,6 +18,7 @@ if ($Es) {
     $MsgNoWinget = "winget no esta instalado o no esta en el PATH. Se requiere Windows 10/11."
     $MsgAdmin    = "Se requieren privilegios de administrador."
     $MsgElevate  = "Se reiniciara el script con elevacion (acepta la peticion UAC)..."
+    $MsgPress    = "Pulsa Enter para continuar..."
     $MsgDownload = "Descargando lista de paquetes..."
     $MsgEmpty    = "La lista no contiene ningun paquete."
     $MsgCount    = "Se instalaran {0} paquetes:"
@@ -29,6 +30,7 @@ if ($Es) {
     $MsgNoWinget = "winget is not installed or not on the PATH. Windows 10/11 is required."
     $MsgAdmin    = "Administrator privileges are required."
     $MsgElevate  = "The script will restart with elevation (accept the UAC prompt)..."
+    $MsgPress    = "Press Enter to continue..."
     $MsgDownload = "Downloading package list..."
     $MsgEmpty    = "The list contains no packages."
     $MsgCount    = "Installing {0} packages:"
@@ -56,6 +58,7 @@ if (-not $IsAdmin) {
     Write-Host $MsgAdmin -ForegroundColor Yellow
     Write-Host $MsgElevate -ForegroundColor Yellow
     Write-Host ""
+    Read-Host $MsgPress | Out-Null
     $ElevatedCmd = "iwr '$BaseUrl/$ListName.ps1' -UseBasicParsing | iex"
     Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', $ElevatedCmd
     exit

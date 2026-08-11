@@ -48,7 +48,6 @@ export const ui = {
       notesTitle: "Notes",
       note1: "Requires <strong>Windows 10/11</strong> with winget (already installed).",
       note2: "If a package fails, the script warns and continues with the next one.",
-      note3: "You don't need to be an administrator for most packages.",
     },
     listas: {
       title: "Package lists",
@@ -157,7 +156,6 @@ export const ui = {
       notesTitle: "Notas",
       note1: "Requiere <strong>Windows 10/11</strong> con winget (ya viene instalado).",
       note2: "Si un paquete falla, el script avisa y continúa con el siguiente.",
-      note3: "No necesitas ser administrador para la mayoría de paquetes.",
     },
     listas: {
       title: "Listas de programas",
