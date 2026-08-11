@@ -58,7 +58,15 @@ if (-not $IsAdmin) {
     Write-Host $MsgAdmin -ForegroundColor Yellow
     Write-Host $MsgElevate -ForegroundColor Yellow
     Write-Host ""
-    Read-Host $MsgPress | Out-Null
+    # Read-Host falla (vuelve al instante) cuando el script entra por iwr | iex,
+    # porque el stdin esta ocupado por el pipe. ReadKey lee el teclado directamente.
+    try {
+        Write-Host $MsgPress -NoNewline -ForegroundColor Yellow
+        [void][System.Console]::ReadKey($true)
+    } catch {
+        Start-Sleep -Seconds 5
+    }
+    Write-Host ""
     $ElevatedCmd = "iwr '$BaseUrl/$ListName.ps1' -UseBasicParsing | iex"
     Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', $ElevatedCmd
     exit
