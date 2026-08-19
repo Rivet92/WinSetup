@@ -28,7 +28,7 @@ Spotify.Spotify
 AIMP.AIMP
 HandBrake.HandBrake
 Audacity.Audacity
-GIMP.GIMP
+Canva.Affinity
 
 # ---- Oficina y utilidades ----
 TheDocumentFoundation.LibreOffice

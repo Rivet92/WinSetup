@@ -12,3 +12,4 @@ GitHub.GitHubDesktop
 Microsoft.PowerToys
 Notepad++.Notepad++
 Postman.Postman
+Microsoft.WSL

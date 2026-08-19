@@ -20,9 +20,7 @@ qBittorrent.qBittorrent
 calibre.calibre
 Bitwarden.Bitwarden
 Rufus.Rufus
-
-# ---- Productividad ----
-Obsidian.Obsidian
+Microsoft.WSL
 
 # ---- Edicion / Creatividad ----
-GIMP.GIMP
+Canva.Affinity

@@ -55,8 +55,8 @@ const metadata = [
     id: "media",
     name: "Media",
     description: {
-      es: "Reproductores y edición: VLC, Spotify, AIMP, HandBrake, Audacity y GIMP.",
-      en: "Players and editing: VLC, Spotify, AIMP, HandBrake, Audacity and GIMP.",
+      es: "Reproductores y edición: VLC, Spotify, AIMP, HandBrake y Audacity.",
+      en: "Players and editing: VLC, Spotify, AIMP, HandBrake and Audacity.",
     },
   },
   {
