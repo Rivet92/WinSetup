@@ -16,7 +16,6 @@ Git.Git
 Microsoft.VisualStudioCode
 OpenJS.NodeJS
 Python.Python.3.12
-Docker.DockerDesktop
 GitHub.GitHubDesktop
 Microsoft.PowerToys
 Notepad++.Notepad++

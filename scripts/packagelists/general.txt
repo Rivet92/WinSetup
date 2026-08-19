@@ -20,7 +20,6 @@ qBittorrent.qBittorrent
 calibre.calibre
 Bitwarden.Bitwarden
 Rufus.Rufus
-Microsoft.WSL
 
 # ---- Edicion / Creatividad ----
 Canva.Affinity

@@ -47,8 +47,8 @@ const metadata = [
     id: "dev",
     name: "Dev",
     description: {
-      es: "Herramientas de desarrollo: Git, VS Code, Node, Python, Docker.",
-      en: "Development tools: Git, VS Code, Node, Python, Docker.",
+      es: "Herramientas de desarrollo: Git, VS Code, Node, Python.",
+      en: "Development tools: Git, VS Code, Node, Python.",
     },
   },
   {
